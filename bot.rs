@@ -1,0 +1,1 @@
+// how the fuck do I write a discord bot in rust
