@@ -11,8 +11,8 @@ struct Handler;
 #[async_trait]
 impl EventHandler for Handler {
     async fn message(&self, ctx: Context, msg: Message) {
-        if msg.content == "shark" {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "shark!").await {
+        if msg.content.make_ascii_lowercase() == "uma" {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "I can be your uma!").await {
                 println!("Error sending message: {why:?}");
             }
         }
@@ -22,6 +22,7 @@ impl EventHandler for Handler {
 #[tokio::main]
 async fn main() {
     // Login with a bot token from the environment
+    // Token parsing from JSON not yet configured
     let token = env::var("DISCORD_TOKEN").expect("Expected a token in the environment");
     // Set gateway intents, which decides what events the bot will be notified about
     let intents = GatewayIntents::GUILD_MESSAGES
